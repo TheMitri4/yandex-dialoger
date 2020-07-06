@@ -1,4 +1,8 @@
 {
+  "main": "lib/index.js",
+  "files": [
+    "lib/**/*"
+  ],
   "devDependencies": {
     "@types/jest": "^26.0.3",
     "@types/node": "^14.0.14",
@@ -12,5 +16,29 @@
   "scripts": {
     "build": "webpack",
     "test": "jest"
-  }
+  },
+  "name": "yandex-dialoger",
+  "description": "Ещё одна библиотека/фреймворк для разработки навыков Алисы.",
+  "version": "0.1.0",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexander-karpov/yandex-dialoger.git"
+  },
+  "homepage": "https://github.com/alexander-karpov/yandex-dialoger",
+  "keywords": [
+    "Alice",
+    "Skills",
+    "Yandex",
+    "Dialogs"
+  ],
+  "author": "Alexander Karpov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexander-karpov/yandex-dialoger/issues"
+  },
+  "dependencies": {}
 }

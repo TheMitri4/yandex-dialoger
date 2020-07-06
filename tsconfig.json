@@ -4,6 +4,9 @@
       "target": "ES2018",
       "declaration": true,
       "strict": true,
-      "pretty": true
-  }
+      "pretty": true,
+      "outDir": "./lib"
+
+  },
+  "include": ["src"]
 }

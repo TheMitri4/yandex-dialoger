@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        dialoger: './src/index.ts',
+        index: './src/index.ts',
     },
     mode: 'production',
     target: 'node',
@@ -20,7 +20,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'lib'),
         libraryTarget: 'commonjs'
     },
 };
