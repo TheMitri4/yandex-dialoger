@@ -1,6 +1,7 @@
 import { SetState } from './SetState';
+import { Startable } from './Startable';
 
 export type TransitionHandler<TState, TSceneId> = (
     state: TState,
     setState: SetState<TState>
-) => TSceneId | Promise<TSceneId>;
+) => Startable<TSceneId> | Promise<Startable<TSceneId>>;
