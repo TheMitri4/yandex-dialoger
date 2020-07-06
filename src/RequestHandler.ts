@@ -1,6 +1,4 @@
 import { DialogRequest } from './DialogRequest';
 import { DialogResponse } from './DialogResponse';
 
-export interface RequestHandler {
-    handleRequest(request: DialogRequest): Promise<DialogResponse>;
-}
+export type RequestHandler = (request: DialogRequest) => Promise<DialogResponse>;

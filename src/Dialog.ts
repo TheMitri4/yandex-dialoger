@@ -19,7 +19,7 @@ import { Startable } from './Startable';
  *  Важно: состояние должно сериализоваться и десериализоваться через JSON. Т.е. нельзя использовать классы с методами.
  * @param TSceneId Можно указать список возможных сцен чтобы исключить случайную ошибку при их определении
  */
-export class Dialog<TState extends object, TSceneId extends string> implements RequestHandler {
+export class Dialog<TState extends object, TSceneId extends string> {
     private readonly scenes: Map<Startable<TSceneId>, SceneProcessor<TState, TSceneId>> = new Map();
     private readonly transitions: Map<
         Startable<TSceneId>,
@@ -28,7 +28,7 @@ export class Dialog<TState extends object, TSceneId extends string> implements R
     private readonly initialState: () => TState;
     private readonly whatCanYouDoHandler: ReplyHandler<TState>;
 
-    private constructor({
+    constructor({
         scenes,
         state,
         whatCanYouDo: whatCanYouDoHandler,
@@ -63,23 +63,6 @@ export class Dialog<TState extends object, TSceneId extends string> implements R
 
             throw new Error(`Элемент ${sceneId} не был распознан ни как сцена ни как переход.`);
         }
-    }
-
-    static create<TSceneId extends string, TState extends object>(
-        params: DialogParams<TState, TSceneId>
-    ): Dialog<TState, TSceneId>;
-
-    /**
-     * В этой версии можно не передавать state, но тип TState будет {}
-     */
-    static create<TSceneId extends string>(
-        params: Omit<DialogParams<{}, TSceneId>, 'state'>
-    ): Dialog<{}, TSceneId>;
-
-    static create<TSceneId extends string>(
-        params: Omit<DialogParams<{}, TSceneId>, 'state'>
-    ): Dialog<{}, TSceneId> {
-        return new Dialog({ state: () => ({}), ...params });
     }
 
     handleRequest(request: DialogRequest): Promise<DialogResponse> {
