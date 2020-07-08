@@ -1,9 +1,9 @@
 import { Dialog } from './Dialog';
 import { RequestHandler } from './RequestHandler';
 import { DialogParams } from './DialogParams';
-export { startServer } from './startServer';
+import { TestClosure } from './TestClosure';
 
- export function createDialog<TSceneId extends string, TState extends object>(
+export function createDialog<TSceneId extends string, TState extends object>(
     params: DialogParams<TState, TSceneId>
 ): RequestHandler;
 
@@ -21,3 +21,9 @@ export function createDialog<TSceneId extends string>(
 
     return dialog.handleRequest.bind(dialog);
 }
+
+export function createTestClosure(handler: RequestHandler): TestClosure {
+    return new TestClosure(handler);
+}
+
+export { startServer as startServer } from './startServer';

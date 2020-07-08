@@ -16,5 +16,5 @@ export interface DialogResponse {
         end_session: boolean;
     };
     version: string; // '1.0';
-    session_state?: unknown;
+    session_state?: {};
 }
