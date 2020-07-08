@@ -1,6 +1,7 @@
 import { Dialog } from './Dialog';
 import { RequestHandler } from './RequestHandler';
 import { DialogParams } from './DialogParams';
+export { startServer } from './startServer';
 
  export function createDialog<TSceneId extends string, TState extends object>(
     params: DialogParams<TState, TSceneId>
