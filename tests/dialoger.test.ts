@@ -1,19 +1,22 @@
 import { createDialog, createTestClosure } from '../src/index';
 
 /**
- * Hello world
+ * Наш навык
  */
-test('Я в порядке', async () => {
-    const closure = createTestClosure(
-        createDialog({
-            scenes: {
-                Start: {
-                    reply: (reply) => reply.withText('Привет.'),
-                    onInput: () => 'Start',
-                },
-            },
-        })
-    );
+const dialog = createDialog({
+    scenes: {
+        Start: {
+            reply: (reply) => reply.withText('Привет.'),
+            onInput: () => 'Start',
+        },
+    },
+});
+
+/**
+ * Тесты
+ */
+test('Hello world', async () => {
+    const closure = createTestClosure(dialog);
 
     const { text } = await closure.handleCommand('');
 

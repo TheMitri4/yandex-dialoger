@@ -9,7 +9,6 @@ import { ReplyHandler } from './ReplyHandler';
 import { TransitionProcessor } from './TransitionProcessor';
 import { Scene } from './Scene';
 import { Transition } from './Transition';
-import { RequestHandler } from './RequestHandler';
 import { DialogParams } from './DialogParams';
 import { Startable } from './Startable';
 
@@ -115,23 +114,30 @@ export class Dialog<TState extends object, TSceneId extends string> {
             isReject: intents && intents.hasOwnProperty(DialogBuildinIntent.Reject),
         };
 
+        /**
+         * Обработка запроса «Помощь»
+         */
+        if ((intents && intents[DialogBuildinIntent.Help]) || command === 'помощь') {
+            scene.applyHelp(reply, context.state);
+
+            return reply.build(context);
+        }
+
+        /**
+         * бработка запроса «Что ты умеешь»
+         */
+
+        if (
+            (intents && inputData.intents[DialogBuildinIntent.WhatCanYouDo]) ||
+            command === 'что ты умеешь'
+        ) {
+            this.whatCanYouDoHandler(reply, context.state);
+            scene.applyHelp(reply, context.state);
+
+            return reply.build(context);
+        }
+
         if (intents) {
-            /**
-             * Обработка запроса «Помощь» и «Что ты умеешь»
-             */
-            if (inputData.intents[DialogBuildinIntent.Help]) {
-                scene.applyHelp(reply, context.state);
-
-                return reply.build(context);
-            }
-
-            if (inputData.intents[DialogBuildinIntent.WhatCanYouDo]) {
-                this.whatCanYouDoHandler(reply, context.state);
-                scene.applyHelp(reply, context.state);
-
-                return reply.build(context);
-            }
-
             /**
              * Обработка запроса «Повтори» и подобных
              */
